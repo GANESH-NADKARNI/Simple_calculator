@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" readonly value="0" />
+    <div class="buttons">
+      <button>(</button>
+      <button>)</button>
+      <button>C</button>
+      <button>%</button> 
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>+</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>-</button>
+
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>x</button>
+
+      
+
+      <button>0</button>
+      <button>.</button>
+      <button>/</button>
+      <button>=</button>
+    </div>
+  </div>
+</body>
+</html>
+<script>
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+  const display = document.querySelector(".display");
+  const buttons = document.querySelectorAll("button");
+
+  let expression = "";
+
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const value = button.textContent;
+
+      if (value === "C") {
+        expression = "";
+        display.value = "0";
+      } else if (value === "=") {
+        try {
+          const result = eval(expression.replace(/x/g, '*'));
+          display.value = result;
+          expression = result.toString();
+        } catch (error) {
+          display.value = "Error";
+          expression = "";
+        }
+      } else {
+        expression += value;
+        display.value = expression;
+      }
+    });
+  });
+});
+</script>
